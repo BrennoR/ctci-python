@@ -10,9 +10,12 @@ class LinkedList:
 
     def add_node(self, val):
         current_node = self.header
-        while current_node.next is not None:
-            current_node = current_node.next
-        current_node.next = Node(val)
+        if current_node is None:
+            self.header = Node(val)
+        else:
+            while current_node.next is not None:
+                current_node = current_node.next
+            current_node.next = Node(val)
 
     def traverse(self):
         current_node = self.header
