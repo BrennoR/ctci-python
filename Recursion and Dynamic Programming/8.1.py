@@ -1,3 +1,4 @@
+import timeit
 # Triple Step
 
 
@@ -32,15 +33,29 @@ def triple_step_memoization(n: int) -> int:
 def triple_step_dynamic(n: int) -> int:
     if n == 1 or n == 2:
         return n
-    elif n == 3:
-        return 4
 
     a, b, c = 1, 2, 4
-    d = 0
-    for _ in range(n - 3):
-        d, a, b, c = a + b + c, b, c, d
+    for _ in range(n - 4):
+        d = a + b + c
+        a = b
+        b = c
+        c = d
 
-    return d
+    return a + b + c
 
 
-print(triple_step_dynamic(5))
+# Solution Check
+print("Recursive Solution:", triple_step_recursive(10))
+print("Memoization Solution", triple_step_memoization(10))
+print("Dynamic Solution", triple_step_dynamic(10))
+
+# Time Comparison
+print("Recursive Solution:",
+      timeit.timeit('triple_step_recursive(15)',
+                    setup="from __main__ import triple_step_recursive", number=10000))
+print("Memoization Solution:",
+      timeit.timeit('triple_step_memoization(15)',
+                    setup="from __main__ import triple_step_memoization", number=10000))
+print("Dynamic Solution:",
+      timeit.timeit('triple_step_dynamic(15)',
+                    setup="from __main__ import triple_step_dynamic", number=10000))
