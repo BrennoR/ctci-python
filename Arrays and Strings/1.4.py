@@ -1,10 +1,9 @@
 # Palindrome Permutation
-
 from collections import Counter
 
 
 # O(n)
-def palindrom_permutation(string: str) -> bool:
+def palindrome_permutation(string: str) -> bool:
 
     cnt = Counter(string)
     odd = False
@@ -22,4 +21,4 @@ if __name__ == "__main__":
     strings = ["tactcoa", "raecrac", "koala", "lososl"]
 
     for string in strings:
-        print(palindrom_permutation(string))
+        print(palindrome_permutation(string))

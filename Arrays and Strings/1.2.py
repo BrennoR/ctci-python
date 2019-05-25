@@ -1,3 +1,4 @@
+# Check Permutation
 import unittest
 from collections import Counter
 
@@ -42,19 +43,9 @@ def check_permutation_list(str1, str2):
     return True
 
 
-# counter method from CtCl-6th-Edition-Python repository by careercup
-# O(N)
-def check_permutation_counter(str1, str2):
-    if len(str1) != len(str2):
-        return False
-    counter = Counter()
-    for c in str1:
-        counter[c] += 1
-    for c in str2:
-        if counter[c] == 0:
-            return False
-        counter[c] -= 1
-    return True
+# simple method O(N)
+def check_permutation_simple(str1, str2):
+    return Counter(str1) == Counter(str2)
 
 
 class TestPermutation(unittest.TestCase):
