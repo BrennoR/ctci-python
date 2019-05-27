@@ -2,3 +2,4 @@
 
 
 def missing_int():
+    pass

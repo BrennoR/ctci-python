@@ -13,15 +13,15 @@ ll.traverse()
 
 
 # O(1)
-def delete_middle_node(middle_node):
-    if middle_node is None or middle_node.next is None:
+def del_middle(node):
+    if node is None or node.next is None:
         return False
 
-    middle_node.val = middle_node.next.val
-    middle_node.next = middle_node.next.next
+    node.val = node.next.val
+    node.next = node.next.next
     return True
 
 
 three_node = ll.header.next.next
-delete_middle_node(three_node)
+del_middle(three_node)
 ll.traverse()

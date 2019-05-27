@@ -16,18 +16,20 @@ ll.add_node(50)
 
 # O(N) time, O(1) space
 def kth_to_last(ll, k):
-    k_runner = ll.header
-    end_runner = k_runner
+    cur = ll.header
+    runner = cur
 
-    for i in range(k - 1):
-        end_runner = end_runner.next
+    for _ in range(k):
+        if runner is None:
+            return None
+        runner = runner.next
 
-    while end_runner.next is not None:
-        k_runner = k_runner.next
-        end_runner = end_runner.next
+    while runner is not None:
+        cur = cur.next
+        runner = runner.next
 
-    return k_runner.val
+    return cur.val
 
 
 ll.traverse()
-print(kth_to_last(ll, 7))
+print(kth_to_last(ll, 2))

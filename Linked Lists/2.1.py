@@ -1,4 +1,4 @@
-# Remove Duplicates
+# Remove Dups
 import importlib
 structures = importlib.import_module('linked-list')
 
@@ -18,35 +18,37 @@ ll.traverse()
 
 
 # O(N) time, O(N) space
-def remove_duplicates_1(ll):
-    values = {}
-
-    node = ll.header
-    while node.next is not None:
-        if node.next.val in values:
-            temp = node.next.next
-            node.next.next = None
-            node.next = temp
+def remove_dups(linklist):
+    cur = linklist.header
+    elements = set()
+    elements.add(cur.val)
+    while cur.next is not None:
+        if cur.next.val in elements:
+            cur.next = cur.next.next
         else:
-            values[node.next.val] = 1
-            node = node.next
+            elements.add(cur.next.val)
+            cur = cur.next
+
+    return linklist.header
 
 
 # without temporary buffer
 # O(N^2) time, O(1) space
 
-def remove_duplicates_2(ll):
-    current = ll.header
-    while current is not None:
-        runner = current
+def remove_dups_2(linklist):
+    cur = linklist.header
+    while cur is not None:
+        runner = cur
         while runner.next is not None:
-            if runner.next.val == current.val:
+            if cur.val == runner.next.val:
                 runner.next = runner.next.next
             else:
                 runner = runner.next
-        current = current.next
+        cur = cur.next
+
+    return linklist.header
 
 
-remove_duplicates_2(ll)
+remove_dups_2(ll)
 ll.traverse()
 
