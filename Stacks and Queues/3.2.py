@@ -1,56 +1,73 @@
 # Stack min
-from stack import Stack
 
 
-# pop, push, min - O(1)
-class MinStack(Stack):
+class MinStack:
+
     def __init__(self):
-        super().__init__()
-        self.min = float('inf')
+        self.stack = []
 
-    def push(self, item):
-        if item < self.min:
-            self.min = item
-        Stack.push(self, [item, self.min])
+    def push(self, element):
+        min = self.getMin(element)
+        self.stack.append((element, min))
 
     def pop(self):
-        Stack.pop(self)
-        self.min = Stack.peek(self)[1]
+        if self.isEmpty():
+            raise Exception("The stack is empty")
+        return self.stack.pop()
 
-    def minimum(self):
-        if not Stack.isEmpty(self):
-            return self.min
+    def peek(self):
+        if self.isEmpty():
+            raise Exception("The stack is empty")
+        return self.stack[-1][0]
+
+    def getMin(self, element):
+        if self.isEmpty() or element < self.stack[-1][1]:
+            return element
         else:
-            raise Exception("Empty stack")
+            return self.stack[-1][1]
+
+    def min(self):
+        if self.isEmpty():
+            raise Exception("The stack is empty")
+        else:
+            return self.stack[-1][1]
+
+    def isEmpty(self):
+        return len(self.stack) == 0
 
 
-# solution better suited to save space
-class MinStack_2(Stack):
+class MinStack2:
+
     def __init__(self):
-        super().__init__()
-        self.s2 = Stack()
-        self.min = float('inf')
+        self.stack = []
+        self.min_stack = []
 
-    def push(self, item):
-        Stack.push(self, item)
-        if item <= self.min:
-            self.s2.push(item)
-            self.min = item
+    def push(self, element):
+        if element <= self.min():
+            self.min_stack.append(element)
+        self.stack.append(element)
 
     def pop(self):
-        if Stack.peek(self) == self.s2.peek():
-            self.s2.pop()
-            self.min = self.s2.peek()
-        Stack.pop(self)
+        if self.peek() <= self.min():
+            self.min_stack.pop()
+        return self.stack.pop()
 
-    def minimum(self):
-        if not Stack.isEmpty(self):
-            return self.s2.peek()
+    def peek(self):
+        if self.isEmpty():
+            raise Exception("The stack is empty")
+        return self.stack[-1]
+
+    def min(self):
+        if self.isEmpty():
+            return float('inf')     # Also serves as an error value (stack is empty -> no min)
         else:
-            raise Exception("Empty stack")
+            return self.min_stack[-1]
+
+    def isEmpty(self):
+        return len(self.stack) == 0
 
 
-s = MinStack_2()
+s = MinStack()
 s.push(10)
 s.push(8)
 s.push(7)
@@ -63,7 +80,9 @@ s.push(1)
 s.pop()
 s.pop()
 s.pop()
-print(s.items)
-print(s.s2.items)
+print(s.stack)
+print(s.min())
 
-print(s.minimum())
+s.pop()
+print(s.stack)
+print(s.min())
