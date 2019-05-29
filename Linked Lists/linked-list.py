@@ -8,14 +8,20 @@ class LinkedList:
     def __init__(self, header: Node):
         self.header = header
 
-    def add_node(self, val):
+    def add_node(self, val=0, node=None):
         current_node = self.header
         if current_node is None:
-            self.header = Node(val)
+            if node:
+                self.header = node
+            else:
+                self.header = Node(val)
         else:
             while current_node.next is not None:
                 current_node = current_node.next
-            current_node.next = Node(val)
+            if node:
+                current_node.next = node
+            else:
+                current_node.next = Node(val)
 
     def traverse(self):
         current_node = self.header
