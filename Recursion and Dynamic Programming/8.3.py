@@ -26,7 +26,7 @@ def magic_index_2(arr):
 
     start = 0
     end = len(arr) - 1
-    while start <= end:
+    while start < end:
         mid = (start + end) // 2
         if arr[mid] == mid:
             return mid
@@ -43,7 +43,7 @@ def magic_index_2(arr):
             if arr[right] == right:
                 return right
 
-            if arr[right] > right and arr[left] > left:
+            if arr[left] > left:
                 start = right
             else:
                 end = left

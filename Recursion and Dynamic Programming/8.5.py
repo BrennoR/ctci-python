@@ -1,40 +1,26 @@
 # Recursive Multiply
 
 
-# Naive solution - O(min(a, b))
-def naive_multiply(a, b):
-    total = 0
-    counter = min(a, b)
-    adder = max(a, b)
-    for _ in range(counter):
-        total += adder
+# Time - O(log s), where s is the smaller
+def minProductHelper(smaller, bigger):
+    if smaller == 0:
+        return 0
+    elif smaller == 1:
+        return bigger
+    s = smaller >> 1
+    halfProd = minProductHelper(s, bigger)
 
-    return total
-
-
-# TODO: finish better solution
-# Better solution
-def better_multiply(a, b):
-    multiplier = min(a, b)
-    adder = max(a, b)
-    times = 0
-    carry = 0
-    while multiplier:
-        times += 1
-        carry += multiplier % 2
-        multiplier = multiplier // 2
-
-    total = adder
-    for _ in range(times - 1):
-        total = total << 1
-
-    for _ in range(carry):
-        total += adder
-
-    return total
+    if smaller % 2 == 0:
+        return halfProd + halfProd
+    else:
+        return halfProd + halfProd + bigger
 
 
-print(naive_multiply(10, 8))
-print(better_multiply(100, 8))
-print(naive_multiply(100, 300))
-print(better_multiply(100, 300))
+def minProduct(a, b):
+    smaller = min(a, b)
+    bigger = max(a, b)
+    return minProductHelper(smaller, bigger)
+
+
+if __name__ == '__main__':
+    print(minProduct(5, 10))
