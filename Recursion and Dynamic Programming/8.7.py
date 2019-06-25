@@ -1,6 +1,7 @@
 # Permutations without Dups
 
 
+# Straightforward solution
 def perm_wo_dups(string):
     if not string:
         return

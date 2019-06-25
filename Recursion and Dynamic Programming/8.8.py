@@ -1,4 +1,5 @@
 # Permutations with Dups
+# TODO: Fix and improve 
 
 
 def perm_w_dups(string):
