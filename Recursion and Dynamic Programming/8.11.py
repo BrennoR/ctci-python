@@ -1,19 +1,20 @@
 # Coins
+# TODO: Implement solution once again
 
 
-def coins(n):
-    count = 1
+# Solution taken from ctci-solutions repository by w-hat
+def coins(cents):
+    count = 0
+    for c in range(cents, -1, -25):
+        count += coins_helper(c)
 
-    if n < 5:
-        return count
+    return count
 
-    for num in range(5, n + 1):
-        if num % 5 == 0:
-            count += 1
-        if num % 10 == 0:
-            count += 1
-        if num % 25 == 0:
-            count += 1
+
+def coins_helper(cents):
+    count = 0
+    for c in range(cents, -1, -10):
+        count += (c // 5) + 1
 
     return count
 
