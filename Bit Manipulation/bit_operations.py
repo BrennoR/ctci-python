@@ -105,3 +105,10 @@ print(bin(clear_bits_i_through_0(int('0b1111', 2), 3)), clear_bits_i_through_0(i
 def update_bit(num, i, bitIs1):
     value = int(bitIs1)
     mask = ~(1 << i)
+    return (num & mask) | (value << i)
+
+
+print(bin(update_bit(int('0b1111', 2), 0, False)), update_bit(int('0b1111', 2), 0, False))
+print(bin(update_bit(int('0b1111', 2), 1, False)), update_bit(int('0b1111', 2), 1, False))
+print(bin(update_bit(int('0b1111', 2), 2, False)), update_bit(int('0b1111', 2), 2, False))
+print(bin(update_bit(int('0b1111', 2), 3, False)), update_bit(int('0b1111', 2), 3, False))
